@@ -17,7 +17,10 @@ namespace Altkom._20_22._11.CSharp.Module1
         public Exercise7()
         {
             Persons = new List<Person> { new Person { Id = 1, BirthDate = new DateTime(1990, 12, 3), Gender = 0, FirstName = "Ewa", LastName = "Adamska" },
-                new Person { Id = 2, BirthDate = new DateTime(1988, 8, 21), Gender = 1, FirstName = "Adam", LastName = "Adamska" } };
+                new Person { Id = 2, BirthDate = new DateTime(1988, 8, 21), Gender = 1, FirstName = "Adam", LastName = "Adamska" },
+            new Person { Id = 3, BirthDate = new DateTime(1988, 8, 21), Gender = 1, FirstName = "Piotr", LastName = "Piotrowski" }};
+
+            //Persons.Clear();
         }
 
         public void Start()
@@ -35,11 +38,17 @@ namespace Altkom._20_22._11.CSharp.Module1
 
         public void ShowPersons()
         {
-            Output?.Invoke(
-                string.Format(_tableFormat, nameof(Person.Id), nameof(Person.LastName), nameof(Person.FirstName), "Age") + "\n" +
-                Persons.OrderBy(x => x.LastName)
-                .Select(x => string.Format(_tableFormat, x.Id, x.LastName, x.FirstName, new DateTime(DateTime.Now.Subtract(x.BirthDate).Ticks).Year))
-                .Aggregate((a, b) => $"{a}\n{b}"));
+            var strings = new List<string>
+            {
+                string.Format(_tableFormat, nameof(Person.Id), nameof(Person.LastName), nameof(Person.FirstName), "Age")
+            };
+
+            strings.AddRange(Persons.OrderBy(x => x.LastName)
+                .Select(x => string.Format(_tableFormat, x.Id, x.LastName, x.FirstName, new DateTime(DateTime.Now.Subtract(x.BirthDate).Ticks).Year)));
+            //if (query.Any())
+            //    strings.Add(query.Aggregate((a, b) => $"{a}\n{b}"));
+
+            Output(string.Join("\n", strings));
         }
 
         public bool ReadCommand(string input)
