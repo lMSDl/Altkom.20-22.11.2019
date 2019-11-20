@@ -45,7 +45,6 @@
                           IsChecked="False"
                           VerticalAlignment="Center" />
 
-                <!-- TODO 1.1c: Wywołaj LogIn_Click event handler-->
                 <Button Grid.Row="3"
                         Grid.ColumnSpan="2"
                         VerticalAlignment="Center"
