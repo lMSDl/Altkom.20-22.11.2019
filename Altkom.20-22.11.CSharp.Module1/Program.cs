@@ -10,7 +10,7 @@ namespace Altkom._20_22._11.CSharp.Module1
     {
         static void Main(string[] args)
         {
-            new Exercise3().Start();
+            new Exercise4().Start();
         }
     }
 }

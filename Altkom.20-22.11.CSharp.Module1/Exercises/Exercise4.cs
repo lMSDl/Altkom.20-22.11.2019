@@ -6,12 +6,12 @@ using System.Windows.Forms;
 
 namespace Altkom._20_22._11.CSharp.Module1
 {
-    public class Exercise3
+    public class Exercise4
     {
         private IList<Person> Persons { get; }
         private string _lastOutout;
 
-        public Exercise3()
+        public Exercise4()
         {
             Persons = new List<Person> { new Person { Id = 1, BirthDate = new DateTime(1990, 12, 3), Gender = 0, FirstName = "Ewa", LastName = "Adamska" },
                 new Person { Id = 2, BirthDate = new DateTime(1988, 8, 21), Gender = 1, FirstName = "Adam", LastName = "Adamska" } };
@@ -32,12 +32,13 @@ namespace Altkom._20_22._11.CSharp.Module1
 
         public bool ReadCommand(string input)
         {
+            //TODO 1 Jeśli użytkownik wpisze "delete {id}", gdzie {id} to identyfikator osoby, wyszukać tę osobę na liście i uruchomić funkcję DeletePerson
+
             var command = input.Split(' ');
             switch (command[0])
             {
                 case "add":
                     AddPerson();
-                    ShowPersons();
                     break;
                 case "edit":
                     if (command.Length > 1)
@@ -48,20 +49,26 @@ namespace Altkom._20_22._11.CSharp.Module1
                             if (person != null)
                             {
                                 EditPerson(person);
-                                ShowPersons();
                                 break;
                             }
                         }
                     }
                     WriteLine(_lastOutout);
-                    break;
+                    return true;
                 case "exit":
                     return false;
                 default:
                     WriteLine(_lastOutout);
-                    break;
+                    return true;
             }
+            ShowPersons();
             return true;
+        }
+
+        public void DeletePerson(Person person)
+        {
+            //TODO 2 Wyświetlić zapytanie o potwierdzenie decyzji
+            //TODO 3 W przypadku potwierdzenia usunąć obiekt z listy, w przeciwnym razie przerwać funkcję
         }
 
         public void AddPerson()
