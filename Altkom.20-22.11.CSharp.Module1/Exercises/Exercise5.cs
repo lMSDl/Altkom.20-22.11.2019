@@ -6,12 +6,12 @@ using System.Windows.Forms;
 
 namespace Altkom._20_22._11.CSharp.Module1
 {
-    public class Exercise4
+    public class Exercise5
     {
         private IList<Person> Persons { get; }
         private string _lastOutout;
 
-        public Exercise4()
+        public Exercise5()
         {
             Persons = new List<Person> { new Person { Id = 1, BirthDate = new DateTime(1990, 12, 3), Gender = 0, FirstName = "Ewa", LastName = "Adamska" },
                 new Person { Id = 2, BirthDate = new DateTime(1988, 8, 21), Gender = 1, FirstName = "Adam", LastName = "Adamska" } };
@@ -27,14 +27,17 @@ namespace Altkom._20_22._11.CSharp.Module1
 
         public void ShowPersons()
         {
+            //TODO 1 Wyświetlić nagłówek z nazwami kolumn
+            //TODO 2 Napisać funkcję konwertującą obiekt Person do string
+            //TODO 3 Zmienić kolumnę z datą urodzenia na kolumnę z wiekiem osoby
+
             WriteLine(Persons.OrderBy(x => x.LastName).Select(x => x.ToString()).Aggregate((a, b) => $"{a}\n{b}"));
         }
 
         public bool ReadCommand(string input)
         {
-            //TODO 1 Jeśli użytkownik wpisze "delete {id}", gdzie {id} to identyfikator osoby, wyszukać tę osobę na liście i uruchomić funkcję DeletePerson
-
             var command = input.Split(' ');
+            Person person;
             switch (command[0])
             {
                 case "delete":
@@ -42,17 +45,16 @@ namespace Altkom._20_22._11.CSharp.Module1
                     {
                         if (int.TryParse(command[1], out var id))
                         {
-                            var person = Persons.SingleOrDefault(x => x.Id == id);
+                            person = Persons.SingleOrDefault(x => x.Id == id);
                             if (person != null)
                             {
-                                
                                 DeletePerson(person);
                                 break;
                             }
                         }
                     }
                     WriteLine(_lastOutout);
-                    break;
+                    return true;
                 case "add":
                     AddPerson();
                     break;
@@ -61,7 +63,7 @@ namespace Altkom._20_22._11.CSharp.Module1
                     {
                         if (int.TryParse(command[1], out var id))
                         {
-                            var person = Persons.SingleOrDefault(x => x.Id == id);
+                            person = Persons.SingleOrDefault(x => x.Id == id);
                             if (person != null)
                             {
                                 EditPerson(person);
@@ -81,20 +83,30 @@ namespace Altkom._20_22._11.CSharp.Module1
             return true;
         }
 
+        public Person FindPerson(string[] command)
+        {
+            if (command.Length > 1 && int.TryParse(command[1], out var id))
+            {
+                return Persons.SingleOrDefault(x => x.Id == id);
+            }
+            return null;
+        }
+
         public void DeletePerson(Person person)
         {
             WriteLine($"Do you want to delete {person.LastName} {person.FirstName}? [y/n]");
             var key = Console.ReadKey();
-            switch (key.KeyChar)
+            if (key.KeyChar == 'y')
             {
-                case 'y':
-                    Persons.Remove(person);
-                    break;
-                case 'n':
-                    return;
-                default:
-                    DeletePerson(person);
-                    break;
+                Persons.Remove(person);
+            }
+            else if (key.KeyChar == 'n')
+            {
+                return;
+            }
+            else
+            {
+                DeletePerson(person);
             }
         }
 
