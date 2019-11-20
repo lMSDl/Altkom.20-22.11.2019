@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace CSharp_PL_AA_3d.ConsoleApp.Module1
+namespace Altkom._20_22._11.CSharp.Module1
 {
     public class Exercise3
     {

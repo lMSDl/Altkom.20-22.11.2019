@@ -1,5 +1,4 @@
-﻿using Altkom._20_22._11.CSharp.Exercises;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +10,7 @@ namespace Altkom._20_22._11.CSharp.Module1
     {
         static void Main(string[] args)
         {
-            new Exercise2().Start();
+            new Exercise3().Start();
         }
     }
 }
