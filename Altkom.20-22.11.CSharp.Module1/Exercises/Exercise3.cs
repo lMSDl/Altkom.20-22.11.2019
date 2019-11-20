@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Altkom._20_22._11.CSharp.Module1
+namespace CSharp_PL_AA_3d.ConsoleApp.Module1
 {
-    public class Exercise2
+    public class Exercise3
     {
         private IList<Person> Persons { get; }
         private string _lastOutout;
 
-        public Exercise2()
+        public Exercise3()
         {
             Persons = new List<Person> { new Person { Id = 1, BirthDate = new DateTime(1990, 12, 3), Gender = 0, FirstName = "Ewa", LastName = "Adamska" },
                 new Person { Id = 2, BirthDate = new DateTime(1988, 8, 21), Gender = 1, FirstName = "Adam", LastName = "Adamska" } };
@@ -32,17 +32,27 @@ namespace Altkom._20_22._11.CSharp.Module1
 
         public bool ReadCommand(string input)
         {
+            //TODO 1 Jeśli użytkownik wpisze "add", należy uruchomić funkcję AddPerson
+            //TODO 2 Po wprowadzeniu danych nowej osoby, należy wyświetlić listę osób
+
             var command = input.Split(' ');
             switch (command[0])
             {
                 case "edit":
-                    if(command.Length > 1 && int.TryParse(command[1], out var id))
+                    if (command.Length > 1)
                     {
-                        var person = Persons.SingleOrDefault(x => x.Id == id);
-                        if(person != null)
-                            EditPerson(person);
+                        if (int.TryParse(command[1], out var id))
+                        {
+                            var person = Persons.SingleOrDefault(x => x.Id == id);
+                            if (person != null)
+                            {
+                                EditPerson(person);
+                                ShowPersons();
+                                break;
+                            }
+                        }
                     }
-                    ShowPersons();
+                    WriteLine(_lastOutout);
                     break;
                 case "exit":
                     return false;
@@ -53,32 +63,41 @@ namespace Altkom._20_22._11.CSharp.Module1
             return true;
         }
 
+        public void AddPerson()
+        {
+            //TODO 3 Utworzyć nowy obiekt Person
+            //TODO 4 Uzupełnić obiekt danymi odczytanymi z konsoli
+            //TODO 5 Zapewnić id unikalne w kolekcji
+        }
+
         public void EditPerson(Person person)
         {
-            string input;
-            do {
+            string line;
+            do
+            {
                 WriteLine(nameof(Person.FirstName));
                 SendKeys.SendWait(person.FirstName);
-            } while (string.IsNullOrWhiteSpace(input = Console.ReadLine()));
-            person.FirstName = input;
+                line = Console.ReadLine();
+            } while (!string.IsNullOrWhiteSpace(line));
+            person.FirstName = line;
 
             do
             {
                 WriteLine(nameof(Person.LastName));
                 SendKeys.SendWait(person.LastName);
-            } while (string.IsNullOrWhiteSpace(input = Console.ReadLine()));
-            person.LastName = input;
+                line = Console.ReadLine();
+            } while (!string.IsNullOrWhiteSpace(line));
+            person.LastName = line;
 
-            DateTime dateTime;
+            DateTime birthDate;
             do
             {
                 WriteLine(nameof(Person.BirthDate));
                 SendKeys.SendWait(person.BirthDate.ToShortDateString());
-                
-            } while (!DateTime.TryParse(Console.ReadLine(), out dateTime));
-            person.BirthDate = dateTime;
+            }
+            while (!DateTime.TryParse(Console.ReadLine(), out birthDate));
+            person.BirthDate = birthDate;
         }
-
 
         private void WriteLine(string outout)
         {
