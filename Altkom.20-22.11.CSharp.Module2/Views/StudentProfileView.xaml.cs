@@ -1,5 +1,6 @@
 ﻿using Altkom._20_22._11.CSharp.Module2.Models;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -26,14 +27,7 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
 
         public void Refresh()
         {
-            // TODO 3.5a: Pobierz dane studenta z kontekstu sesji i przypisz do studentName.DataContext
-
-            var spittedName = SessionContext.CurrentStudent.Split(' ');
-            var firstName = spittedName[0];
-            var lastName = spittedName[1];
-
-            ((TextBlock)studentName.Children[0]).Text = firstName;
-            ((TextBlock)studentName.Children[1]).Text = lastName;
+            studentName.DataContext = SessionContext.CurrentStudent;
 
             if (SessionContext.UserRole == Role.Student)
             {
@@ -43,7 +37,10 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
             {
                 btnBack.Visibility = Visibility.Visible;
             }
-            // TODO 3.5b: Utwórz listę ocen studenta i wyświetl je przypisując do studentGrades.ItemsSource
+
+            studentGrades.ItemsSource = from Grade g in DataSource.Grades
+                                        where g.StudentID == SessionContext.CurrentStudent.StudentID
+                                        select g;
         }
     }
 }

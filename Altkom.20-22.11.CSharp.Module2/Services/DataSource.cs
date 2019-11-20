@@ -1,8 +1,7 @@
-﻿using Altkom._20_22._11.CSharp.Module2.Models;
-using System;
+﻿using System;
 using System.Collections;
 
-namespace Altkom._20_22._11.CSharp.Module2.Services
+namespace Altkom._20_22._11.CSharp.Module2.Models
 {
     public static class DataSource
     {
@@ -13,7 +12,7 @@ namespace Altkom._20_22._11.CSharp.Module2.Services
 
         public static void CreateData()
         {
-            //TODO 2.1a: Utwórz strukturę Teacher
+            //TODO 4.4: Wykorzystaj konstruktor do utworzenia obiektów klasy Teacher
             Teachers = new ArrayList()
             {
                 new Teacher() { TeacherID = 1, UserName = "vallee", Password = "password", FirstName = "Esther", LastName = "Valle", Class = "3C" },
@@ -21,7 +20,6 @@ namespace Altkom._20_22._11.CSharp.Module2.Services
                 new Teacher() { TeacherID = 3, UserName = "newmanb", Password = "password", FirstName = "Belinda", LastName = "Newman", Class = "2A" }
             };
 
-            //TODO 2.1b: Utwórz strukturę Student
             Students = new ArrayList()
             {
                 new Student() { StudentID = 1, UserName = "liuk", Password = "password", TeacherID = 1, FirstName = "Kevin", LastName = "Liu" },
@@ -42,7 +40,6 @@ namespace Altkom._20_22._11.CSharp.Module2.Services
 
             };
 
-            //TODO 2.1c: Utwórz strukturę Grades
             Grades = new ArrayList()
             {
                 new Grade() { StudentID = 1, AssessmentDate = DateTime.Now.ToString("d"), SubjectName = "Math", Assessment = "A-", Comments = "Good" },
@@ -108,3 +105,4 @@ namespace Altkom._20_22._11.CSharp.Module2.Services
             };
         }
     }
+}

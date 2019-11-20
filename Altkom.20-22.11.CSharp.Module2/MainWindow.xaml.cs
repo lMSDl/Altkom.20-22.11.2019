@@ -1,16 +1,16 @@
-﻿using Altkom._20_22._11.CSharp.Module2.Views;
-﻿using Altkom._20_22._11.CSharp.Module2.Models;
-using System;
+﻿using System;
 using System.Windows;
+using Altkom._20_22._11.CSharp.Module2.Models;
+using Altkom._20_22._11.CSharp.Module2.Views;
 
 namespace Altkom._20_22._11.CSharp.Module2
 {
     public partial class MainWindow : Window
     {
-        //TODO 3.1 Zainicjuj źródło danych 
         public MainWindow()
         {
             InitializeComponent();
+            DataSource.CreateData();
             GotoLogon();
         }
 
@@ -44,7 +44,10 @@ namespace Altkom._20_22._11.CSharp.Module2
             Refresh();
         }
 
-        // TODO 3.2a: Obsłuż nieudane logowanie. Wyświetl wiadomość błedu (MessageBox.Show)
+        private void LogInView_LogInFailed(object sender, EventArgs e)
+        {
+            MessageBox.Show("Invalid Username or Password", "Logon Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
 
         private void LogOff_Click(object sender, EventArgs e)
         {
@@ -56,24 +59,23 @@ namespace Altkom._20_22._11.CSharp.Module2
             GotoStudentsPage();
         }
 
-        //TODO 3.4d: Popraw powstałe błędy
         private void StudentsView_StudentSelected(object sender, StudentEventArgs e)
         {
-            SessionContext.CurrentStudent = e.Name;
+            SessionContext.CurrentStudent = e.Student;
             GotoStudentProfile();
         }
 
         private void Refresh()
         {
-            //TODO 3.3f Popraw powitanie zalogowanego użytkownika
-            txtName.Text = string.Format("Welcome {0}", SessionContext.UserName);
             switch (SessionContext.UserRole)
             {
                 case Role.Student:
+                    txtName.Text = string.Format("Welcome {0} {1}", SessionContext.CurrentStudent.FirstName, SessionContext.CurrentStudent.LastName);
                     GotoStudentProfile();
                     break;
 
                 case Role.Teacher:
+                    txtName.Text = string.Format("Welcome {0} {1}", SessionContext.CurrentTeacher.FirstName, SessionContext.CurrentTeacher.LastName);
                     GotoStudentsPage();
                     break;
             }

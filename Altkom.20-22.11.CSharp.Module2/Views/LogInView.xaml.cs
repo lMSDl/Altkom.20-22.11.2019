@@ -1,5 +1,7 @@
-﻿using Altkom._20_22._11.CSharp.Module2.Models;
+﻿
+using Altkom._20_22._11.CSharp.Module2.Models;
 using System;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace Altkom._20_22._11.CSharp.Module2.Views
@@ -12,24 +14,47 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
         }
 
         public event EventHandler LogInSuccess;
+        public event EventHandler LogInFailed;
 
-        // TODO 3.2a: Dodaj zdarzenie LogInFailed
-
-        // TODO 3.2b: Wyszukaj użytkownika wykorzystując kolekcje nauczycieli i uczniów ze źródła danych
         private void LogIn_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(username.Text) || string.IsNullOrWhiteSpace(password.Password))
-                return;
+            //TODO 4.2a: Wykorzystaj metodę VerifyPassword z klasy Teacher do autoryzacji
+            var teacher = (from Teacher t in DataSource.Teachers
+                           where string.Compare(t.UserName, username.Text) == 0
+                           && string.Compare(t.Password, password.Password) == 0
+                           select t).FirstOrDefault();
 
-            SessionContext.UserName = username.Text;
-            SessionContext.UserRole = (bool)userrole.IsChecked ? Role.Teacher : Role.Student;
-
-            if (SessionContext.UserRole == Role.Student)
+            //TODO 4.2b: Sprawdź czy obiekt jest różny od null
+            if (!string.IsNullOrEmpty(teacher.UserName))
             {
-                SessionContext.CurrentStudent = "Some Student";
+                SessionContext.UserID = teacher.TeacherID;
+                SessionContext.UserRole = Role.Teacher;
+                SessionContext.CurrentTeacher = teacher;
+
+                LogInSuccess(this, null);
+                return;
+            }
+            else
+            {
+                //TODO 4.3a: Wykorzystaj metodę VerifyPassword z klasy Student do autoryzacji
+                var student = (from Student s in DataSource.Students
+                               where string.Compare(s.UserName, username.Text) == 0
+                               && string.Compare(s.Password, password.Password) == 0
+                               select s).FirstOrDefault();
+
+                //TODO 4.3b: Sprawdź czy obiekt jest różny od null
+                if (!string.IsNullOrEmpty(student.UserName))
+                {
+                    SessionContext.UserID = student.StudentID;
+                    SessionContext.UserRole = Role.Student;
+                    SessionContext.CurrentStudent = student;
+
+                    LogInSuccess(this, null);
+                    return;
+                }
             }
 
-            LogInSuccess?.Invoke(this, null);
+            LogInFailed(this, null);
         }
     }
 }
