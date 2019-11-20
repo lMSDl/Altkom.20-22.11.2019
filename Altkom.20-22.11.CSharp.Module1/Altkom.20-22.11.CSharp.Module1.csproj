@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Exercises\Exercise1.cs" />
     <Compile Include="Exercises\Exercise2.cs" />
+    <Compile Include="Exercises\Exercise4.cs" />
     <Compile Include="Exercises\Exercise3.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Program.cs" />
