@@ -32,8 +32,6 @@ namespace Altkom._20_22._11.CSharp.Module1
 
         public bool ReadCommand(string input)
         {
-            //TODO 1 Jeśli użytkownik wpisze "delete {id}", gdzie {id} to identyfikator osoby, wyszukać tę osobę na liście i uruchomić funkcję DeletePerson
-
             var command = input.Split(' ');
             switch (command[0])
             {
