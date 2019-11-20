@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.20-22.11.CSharp.Module1", "Altkom.20-22.11.CSharp.Module1\Altkom.20-22.11.CSharp.Module1.csproj", "{41D3621A-5A3A-4FDC-8D38-146FE637D4FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altkom.20-22.11.CSharp.Module2", "Altkom.20-22.11.CSharp.Module2\Altkom.20-22.11.CSharp.Module2.csproj", "{E96333C7-3957-40A7-8A08-3A51B69856D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{41D3621A-5A3A-4FDC-8D38-146FE637D4FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41D3621A-5A3A-4FDC-8D38-146FE637D4FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41D3621A-5A3A-4FDC-8D38-146FE637D4FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E96333C7-3957-40A7-8A08-3A51B69856D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E96333C7-3957-40A7-8A08-3A51B69856D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E96333C7-3957-40A7-8A08-3A51B69856D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E96333C7-3957-40A7-8A08-3A51B69856D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,9 @@
+﻿<Application x:Class="Altkom._20_22._11.CSharp.Module2.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Altkom._20_22._11.CSharp.Module2"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
