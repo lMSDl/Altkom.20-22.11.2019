@@ -6,13 +6,13 @@ using System.Windows.Forms;
 
 namespace Altkom._20_22._11.CSharp.Module1
 {
-    public class Exercise5
+    public class Exercise6
     {
         private IList<Person> Persons { get; }
         private string _lastOutout;
-        private const string Format = "{0,-3} {1,-15} {2,-15} {3,-10}";
+        private static readonly string _tableFormat = "{0,-3} {1,-15} {2,-15} {3,-10}";
 
-        public Exercise5()
+        public Exercise6()
         {
             Persons = new List<Person> { new Person { Id = 1, BirthDate = new DateTime(1990, 12, 3), Gender = 0, FirstName = "Ewa", LastName = "Adamska" },
                 new Person { Id = 2, BirthDate = new DateTime(1988, 8, 21), Gender = 1, FirstName = "Adam", LastName = "Adamska" } };
@@ -28,22 +28,17 @@ namespace Altkom._20_22._11.CSharp.Module1
 
         public void ShowPersons()
         {
-            /*var output = string.Format(Format, nameof(Person.Id), nameof(Person.LastName), nameof(Person.FirstName), "Age");
-            output += "\n";
-            output += Persons.OrderBy(x => x.LastName)
-                .Select(x => string.Format(Format, x.Id, x.LastName, x.FirstName, new DateTime(DateTime.Now.Subtract(x.BirthDate).Ticks).Year))
-                .Aggregate((a, b) => $"{a}\n{b}");
-
-            WriteLine(output);*/
-
-            WriteLine(string.Format(Format, nameof(Person.Id), nameof(Person.LastName), nameof(Person.FirstName), "Age") + '\n' +
+            WriteLine(
+                string.Format(_tableFormat, nameof(Person.Id), nameof(Person.LastName), nameof(Person.FirstName), "Age") + "\n" +
                 Persons.OrderBy(x => x.LastName)
-                .Select(x => string.Format(Format, x.Id, x.LastName, x.FirstName, new DateTime(DateTime.Now.Subtract(x.BirthDate).Ticks).Year))
+                .Select(x => string.Format(_tableFormat, x.Id, x.LastName, x.FirstName, new DateTime(DateTime.Now.Subtract(x.BirthDate).Ticks).Year))
                 .Aggregate((a, b) => $"{a}\n{b}"));
         }
 
         public bool ReadCommand(string input)
         {
+            //TODO 1 Przeprowadzić refaktoryzację "hardkowowania"
+            //TODO 2 Przeprowadzić refaktoryzację powtarzającego się kodu
             var command = input.Split(' ');
             Person person;
             switch (command[0])
@@ -91,15 +86,6 @@ namespace Altkom._20_22._11.CSharp.Module1
             return true;
         }
 
-        public Person FindPerson(string[] command)
-        {
-            if (command.Length > 1 && int.TryParse(command[1], out var id))
-            {
-                return Persons.SingleOrDefault(x => x.Id == id);
-            }
-            return null;
-        }
-
         public void DeletePerson(Person person)
         {
             WriteLine($"Do you want to delete {person.LastName} {person.FirstName}? [y/n]");
@@ -128,6 +114,8 @@ namespace Altkom._20_22._11.CSharp.Module1
 
         public void EditPerson(Person person)
         {
+            //TODO 2 Przeprowadzić refaktoryzację powtarzającego się kodu
+
             string line;
             do
             {
