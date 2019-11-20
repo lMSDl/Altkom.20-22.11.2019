@@ -46,6 +46,7 @@
 
             <Grid Grid.Row="1">
                 <!-- CONTENT -->
+                <!-- TODO 3.2b: Połącz zdarzenie nieudanego logowania z metodą obsługującą to zdarzenie -->
                 <y:LogInView x:Name="logInView"
                              Visibility="Collapsed"
                              LogInSuccess="LogInView_LogInSuccess"/>

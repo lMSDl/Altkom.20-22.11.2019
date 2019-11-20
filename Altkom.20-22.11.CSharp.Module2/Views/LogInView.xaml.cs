@@ -1,4 +1,4 @@
-﻿using Altkom._20_22._11.CSharp.Module2.Services;
+﻿using Altkom._20_22._11.CSharp.Module2.Models;
 using System;
 using System.Windows.Controls;
 
@@ -13,16 +13,23 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
 
         public event EventHandler LogInSuccess;
 
+        // TODO 3.2a: Dodaj zdarzenie LogInFailed
 
-        private void LogIn_Click(object sender, EventArgs eventArgs)
+        // TODO 3.2b: Wyszukaj użytkownika wykorzystując kolekcje nauczycieli i uczniów ze źródła danych
+        private void LogIn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(username.Text) || string.IsNullOrWhiteSpace(password.Password))
                 return;
 
             SessionContext.UserName = username.Text;
-            SessionContext.UserRole = userrole.IsChecked.Value ? Models.Role.Teacher : Models.Role.Student;
+            SessionContext.UserRole = (bool)userrole.IsChecked ? Role.Teacher : Role.Student;
 
-            LogInSuccess?.Invoke(this, EventArgs.Empty);
+            if (SessionContext.UserRole == Role.Student)
+            {
+                SessionContext.CurrentStudent = "Some Student";
+            }
+
+            LogInSuccess?.Invoke(this, null);
         }
     }
 }

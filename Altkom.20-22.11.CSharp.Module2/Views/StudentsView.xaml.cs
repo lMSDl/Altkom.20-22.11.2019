@@ -11,6 +11,7 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
             InitializeComponent();
         }
 
+        // TODO 3.4a: Wyśwetl studentów zalogowanego nauczyciela
         public void Refresh()
         {
             txtClass.Text = "3A";
@@ -18,14 +19,20 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
         
         public delegate void StudentSelectionHandler(object sender, StudentEventArgs e);
         public event StudentSelectionHandler StudentSelected;
-        
-        // TODO: 1.4a: Obsłuż kliknięcie w przycik studenta. Podnieś zdarzenie StudentSelected  i przekaż informację, który student został wybrany. Informację tę można odczytać z właściwości Tag nadawcy zdarzenia.
+
+        // TODO 3.4c: Pobierz obiekt studenta z kontekstu przycisku (itemClicked.DataContext)
         private void Student_Click(object sender, RoutedEventArgs e)
         {
-
+            var itemClicked = sender as Button;
+            if (itemClicked != null)
+            {
+                string studentName = (string)itemClicked.Tag;
+                StudentSelected?.Invoke(sender, new StudentEventArgs(studentName));
+            }
         }
     }
 
+    //TODO 3.4b: Zmień właściwość argumentów zdarzenia na typ Student
     public class StudentEventArgs : EventArgs
     {
         public string Name { get; set; }

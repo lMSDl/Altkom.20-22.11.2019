@@ -12,7 +12,6 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -34,24 +33,13 @@
                              Grid.Row="1"
                              Grid.Column="1"
                              FontSize="22" />
-
-                <TextBlock Grid.Row="2"
-                           FontSize="24"
-                           Text="Teacher:" />
-                <CheckBox x:Name="userrole"
-                          Grid.Row="2"
-                          Grid.Column="2"
-                          FontSize="24"
-                          IsChecked="False"
-                          VerticalAlignment="Center" />
-
-                <Button Grid.Row="3"
+                <Button Grid.Row="2"
                         Grid.ColumnSpan="2"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Content="Log in"
                         FontSize="24"
-                        Click="LogIn_Click"/>
+                        Click="LogIn_Click" />
             </Grid>
         </Grid>
     </Grid>

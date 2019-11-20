@@ -1,5 +1,5 @@
-﻿using Altkom._20_22._11.CSharp.Module2.Services;
-using Altkom._20_22._11.CSharp.Module2.Views;
+﻿using Altkom._20_22._11.CSharp.Module2.Views;
+﻿using Altkom._20_22._11.CSharp.Module2.Models;
 using System;
 using System.Windows;
 
@@ -7,6 +7,7 @@ namespace Altkom._20_22._11.CSharp.Module2
 {
     public partial class MainWindow : Window
     {
+        //TODO 3.1 Zainicjuj źródło danych 
         public MainWindow()
         {
             InitializeComponent();
@@ -38,10 +39,12 @@ namespace Altkom._20_22._11.CSharp.Module2
 
         private void LogInView_LogInSuccess(object sender, EventArgs e)
         {
-            gridLoggedIn.Visibility = Visibility.Visible;
             logInView.Visibility = Visibility.Collapsed;
+            gridLoggedIn.Visibility = Visibility.Visible;
             Refresh();
         }
+
+        // TODO 3.2a: Obsłuż nieudane logowanie. Wyświetl wiadomość błedu (MessageBox.Show)
 
         private void LogOff_Click(object sender, EventArgs e)
         {
@@ -53,21 +56,25 @@ namespace Altkom._20_22._11.CSharp.Module2
             GotoStudentsPage();
         }
 
+        //TODO 3.4d: Popraw powstałe błędy
         private void StudentsView_StudentSelected(object sender, StudentEventArgs e)
         {
+            SessionContext.CurrentStudent = e.Name;
+            GotoStudentProfile();
         }
 
         private void Refresh()
         {
-            txtName.Text = $"Welcome {SessionContext.UserName}";
-
+            //TODO 3.3f Popraw powitanie zalogowanego użytkownika
+            txtName.Text = string.Format("Welcome {0}", SessionContext.UserName);
             switch (SessionContext.UserRole)
             {
-                case Models.Role.Teacher:
-                    GotoStudentsPage();
-                    break;
-                case Models.Role.Student:
+                case Role.Student:
                     GotoStudentProfile();
+                    break;
+
+                case Role.Teacher:
+                    GotoStudentsPage();
                     break;
             }
         }
