@@ -1,5 +1,6 @@
 ﻿namespace Altkom._20_22._11.CSharp.Module2.Models
 {
+    // TODO 5.1a: Określ, że Student ma implementować interfejs IComparable<Student>
     public class Student
     {
         private string _password;
@@ -38,5 +39,7 @@
         public Student()
         {
         }
+
+        //TODO 5.1b: Zaimplementuj interfejs i porównaj obiekty na podstawie imienia i nazwiska
     }
 }

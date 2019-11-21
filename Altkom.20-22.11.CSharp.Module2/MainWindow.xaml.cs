@@ -10,7 +10,8 @@ namespace Altkom._20_22._11.CSharp.Module2
         public MainWindow()
         {
             InitializeComponent();
-            DataSource.CreateData();
+            DataSource.CreateData(); 
+            // TODO 5.3: Posortuj kolekcję studentów
             GotoLogon();
         }
 

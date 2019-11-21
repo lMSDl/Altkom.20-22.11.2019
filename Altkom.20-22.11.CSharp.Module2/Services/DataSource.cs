@@ -6,13 +6,13 @@ namespace Altkom._20_22._11.CSharp.Module2.Models
     public static class DataSource
     {
         public static ArrayList Teachers;
+        //TODO 5.2a: Zmień typ kolekcji studentów na List<Student>
         public static ArrayList Students;
         public static ArrayList Grades;
 
 
         public static void CreateData()
         {
-            //TODO 4.4: Wykorzystaj konstruktor do utworzenia obiektów klasy Teacher
             Teachers = new ArrayList()
             {
                 new Teacher(1, "vallee", "password", @class: "3C",  firstName: "Esther", lastName: "Valle"),
@@ -20,6 +20,7 @@ namespace Altkom._20_22._11.CSharp.Module2.Models
                 new Teacher(3, "newmanb", "password", "Belinda", "Newman", "2A" )
             };
 
+            // TODO 5.2b: Popraw typ tworzonej kolekcji
             Students = new ArrayList()
             {
                 new Student() { StudentID = 1, UserName = "liuk", Password = "password", TeacherID = 1, FirstName = "Kevin", LastName = "Liu" },
