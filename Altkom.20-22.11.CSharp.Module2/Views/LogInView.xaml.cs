@@ -18,14 +18,12 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
 
         private void LogIn_Click(object sender, EventArgs e)
         {
-            //TODO 4.2a: Wykorzystaj metodę VerifyPassword z klasy Teacher do autoryzacji
             var teacher = (from Teacher t in DataSource.Teachers
                            where string.Compare(t.UserName, username.Text) == 0
-                           && string.Compare(t.Password, password.Password) == 0
+                           && t.VerifyPassword(password.Password)
                            select t).FirstOrDefault();
 
-            //TODO 4.2b: Sprawdź czy obiekt jest różny od null
-            if (!string.IsNullOrEmpty(teacher.UserName))
+            if (!string.IsNullOrEmpty(teacher?.UserName))
             {
                 SessionContext.UserID = teacher.TeacherID;
                 SessionContext.UserRole = Role.Teacher;
@@ -36,14 +34,12 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
             }
             else
             {
-                //TODO 4.3a: Wykorzystaj metodę VerifyPassword z klasy Student do autoryzacji
                 var student = (from Student s in DataSource.Students
                                where string.Compare(s.UserName, username.Text) == 0
-                               && string.Compare(s.Password, password.Password) == 0
+                               && s.VerifyPassword(password.Password)
                                select s).FirstOrDefault();
 
-                //TODO 4.3b: Sprawdź czy obiekt jest różny od null
-                if (!string.IsNullOrEmpty(student.UserName))
+                if (student != null && !string.IsNullOrEmpty(student.UserName))
                 {
                     SessionContext.UserID = student.StudentID;
                     SessionContext.UserRole = Role.Student;

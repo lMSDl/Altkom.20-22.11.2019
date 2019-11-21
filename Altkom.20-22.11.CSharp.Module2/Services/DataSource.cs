@@ -15,9 +15,9 @@ namespace Altkom._20_22._11.CSharp.Module2.Models
             //TODO 4.4: Wykorzystaj konstruktor do utworzenia obiektów klasy Teacher
             Teachers = new ArrayList()
             {
-                new Teacher() { TeacherID = 1, UserName = "vallee", Password = "password", FirstName = "Esther", LastName = "Valle", Class = "3C" },
-                new Teacher() { TeacherID = 2, UserName = "waited", Password = "password", FirstName = "David", LastName = "Waite", Class = "4B" },
-                new Teacher() { TeacherID = 3, UserName = "newmanb", Password = "password", FirstName = "Belinda", LastName = "Newman", Class = "2A" }
+                new Teacher(1, "vallee", "password", @class: "3C",  firstName: "Esther", lastName: "Valle"),
+                new Teacher(2, "waited", "password", "David", "Waite", "4B" ),
+                new Teacher(3, "newmanb", "password", "Belinda", "Newman", "2A" )
             };
 
             Students = new ArrayList()
