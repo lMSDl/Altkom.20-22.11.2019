@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using Altkom._20_22._11.CSharp.Module2.Models;
+using Altkom._20_22._11.CSharp.Module2.Services;
 using Altkom._20_22._11.CSharp.Module2.Views;
 
 namespace Altkom._20_22._11.CSharp.Module2
@@ -10,8 +11,8 @@ namespace Altkom._20_22._11.CSharp.Module2
         public MainWindow()
         {
             InitializeComponent();
-            DataSource.CreateData(); 
-            // TODO 5.3: Posortuj kolekcję studentów
+            DataSource.CreateData();
+            DataSource.Students.Sort();
             GotoLogon();
         }
 

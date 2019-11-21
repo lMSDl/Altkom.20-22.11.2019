@@ -1,45 +1,46 @@
-﻿namespace Altkom._20_22._11.CSharp.Module2.Models
+﻿using System;
+
+namespace Altkom._20_22._11.CSharp.Module2.Models
 {
-    // TODO 5.1a: Określ, że Student ma implementować interfejs IComparable<Student>
-    public class Student
+    public class Student : IComparable<Student>
     {
-        private string _password;
-        private string _userName;
+        private string _password = Guid.NewGuid().ToString();
 
         public int StudentID { get; set; }
-        public string UserName { get => _userName;
-            set {
-                if(_userName != value)
-                    _userName = value;
-            }
+        public string UserName { get; set; }
+        public string Password
+        {
+            set => _password = value;
         }
-        //get i set pozwalają na dopisanie dodatkowej logiki
-        //public string Password { set { _password = value; } }
-        public string Password { set => _password = value; }
         public int TeacherID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public bool VerifyPassword(string password)
+        public bool VerifyPassword(string pass)
         {
-            return _password == password;
+            return (string.Compare(pass, _password) == 0);
         }
 
-
-        public Student(int studentID, string userName, string password, int teacherID, string firstName, string lastName)
+        public Student(int studentID, string userName, string password, string firstName, string lastName, int teacherID)
         {
             StudentID = studentID;
             UserName = userName;
             Password = password;
-            TeacherID = teacherID;
             FirstName = firstName;
             LastName = lastName;
+            TeacherID = teacherID;
         }
-
         public Student()
         {
         }
 
-        //TODO 5.1b: Zaimplementuj interfejs i porównaj obiekty na podstawie imienia i nazwiska
+        public int CompareTo(Student other)
+        {
+            var thisStudentsFullName = LastName + FirstName;
+            var otherStudentsFullName = other.LastName + other.FirstName;
+            return (string.Compare(thisStudentsFullName, otherStudentsFullName));
+        }
+
+        //TODO 6.2c: Napisz funkcję AddGrade(Grade grade) przypisującą ocenę studentowi. Jeśli ocena jest już przypisana do jakiegoś studenta rzuć wyjątek.
     }
 }

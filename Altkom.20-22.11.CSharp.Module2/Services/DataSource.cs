@@ -1,27 +1,32 @@
-﻿using System;
+﻿using Altkom._20_22._11.CSharp.Module2.Models;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
-namespace Altkom._20_22._11.CSharp.Module2.Models
+namespace Altkom._20_22._11.CSharp.Module2.Services
 {
     public static class DataSource
     {
+        // TODO 6.1a: Zmień kolekcję Teachers na listę generyczną
         public static ArrayList Teachers;
-        //TODO 5.2a: Zmień typ kolekcji studentów na List<Student>
-        public static ArrayList Students;
+        public static List<Student> Students;
+        // TODO 6.1b: Zmień kolekcję Grades na listę generyczną
         public static ArrayList Grades;
 
+        //TODO 6.1e: Dodalij listę stringów o nazwie Subjects 
 
         public static void CreateData()
         {
+            //TODO 6.1c: Popraw typ tworzonej kolekcji
             Teachers = new ArrayList()
+            //TODO 6.1f: Zainicjuj kolekcję Subjects przesmiotami: Math, English, History, Geography, Science
             {
-                new Teacher(1, "vallee", "password", @class: "3C",  firstName: "Esther", lastName: "Valle"),
+                new Teacher(1, "vallee", "password", "Esther", "Valle", "3C" ),
                 new Teacher(2, "waited", "password", "David", "Waite", "4B" ),
                 new Teacher(3, "newmanb", "password", "Belinda", "Newman", "2A" )
             };
 
-            // TODO 5.2b: Popraw typ tworzonej kolekcji
-            Students = new ArrayList()
+            Students = new List<Student>()
             {
                 new Student() { StudentID = 1, UserName = "liuk", Password = "password", TeacherID = 1, FirstName = "Kevin", LastName = "Liu" },
                 new Student() { StudentID = 2, UserName = "weberm", Password = "password", TeacherID = 1, FirstName = "Martin", LastName = "Weber" },
@@ -41,6 +46,7 @@ namespace Altkom._20_22._11.CSharp.Module2.Models
 
             };
 
+            //TODO 6.1d: Popraw typ tworzonej kolekcji
             Grades = new ArrayList()
             {
                 new Grade() { StudentID = 1, AssessmentDate = DateTime.Now.ToString("d"), SubjectName = "Math", Assessment = "A-", Comments = "Good" },
