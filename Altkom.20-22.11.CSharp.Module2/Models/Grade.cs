@@ -12,7 +12,7 @@ namespace Altkom._20_22._11.CSharp.Module2.Models
 
         public bool ShouldSerializeComments()
         {
-            return Assessment != "A+";
+            return Assessment != "B+";
         }
 
         //ctrl+. => generate constructor

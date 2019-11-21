@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml;
 
 namespace Altkom._20_22._11.CSharp.Module2.Views
 {
@@ -95,7 +96,7 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
             try
             {
                 var grades = DataSource.Grades.Where(g => g.StudentID == SessionContext.CurrentStudent.StudentID).ToList();
-                var output = JsonConvert.SerializeObject(grades, Formatting.Indented);
+                var output = JsonConvert.SerializeObject(grades, Newtonsoft.Json.Formatting.Indented);
                 
                 var reply = MessageBox.Show(output, "Save Report?", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (reply == MessageBoxResult.Yes)
@@ -149,12 +150,22 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
         private void LoadReport_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
-            dialog.Filter = "JSON documents|*.json";
+            dialog.Filter = "JSON documents|*.json|XML documents|*.xml";
             bool? result = dialog.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
-                string gradesAsJson = File.ReadAllText(dialog.FileName);
+                string gradesAsJson;
+                if (dialog.FileName.EndsWith(".xml")) {
+                    var xml = new XmlDocument();
+                    xml.LoadXml(File.ReadAllText(dialog.FileName));
+                    gradesAsJson = JsonConvert.SerializeXmlNode(xml, Newtonsoft.Json.Formatting.Indented, true);
+                    var indexOfStart = gradesAsJson.IndexOf('[');
+                    var indexOfEnd = gradesAsJson.IndexOf(']');
+                    gradesAsJson = gradesAsJson.Substring(indexOfStart, indexOfEnd - indexOfStart + 1);
+                }
+                else
+                    gradesAsJson = File.ReadAllText(dialog.FileName);
                 var gradeList = JsonConvert.DeserializeObject<List<Grade>>(gradesAsJson);
                 studentGrades.ItemsSource = gradeList;
             }
