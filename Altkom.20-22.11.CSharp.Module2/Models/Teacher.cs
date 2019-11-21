@@ -2,6 +2,7 @@
 
 namespace Altkom._20_22._11.CSharp.Module2.Models
 {
+    //TODO 7.2b: Dodaj dziedziczenie po klasie User do klasy Teacher. Usuń właściwości i metody, które znajdują się już w klasie User.
     public class Teacher
     {
         private string _password = Guid.NewGuid().ToString();

@@ -1,7 +1,8 @@
 ﻿using System;
 
 namespace Altkom._20_22._11.CSharp.Module2.Models
-{
+{    
+    //TODO 7.2a: Dodaj dziedziczenie po klasie User do klasy Student. Usuń właściwości i metody, które znajdują się już w klasie User.
     public class Student : IComparable<Student>
     {
         private string _password = Guid.NewGuid().ToString();
