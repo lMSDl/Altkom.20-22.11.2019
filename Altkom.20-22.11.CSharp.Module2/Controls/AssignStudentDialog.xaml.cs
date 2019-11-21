@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Controls;
 using Altkom._20_22._11.CSharp.Module2.Services;
+using Altkom._20_22._11.CSharp.Module2.Models;
 
 namespace Altkom._20_22._11.CSharp.Module2.Controls
 {
@@ -38,23 +39,29 @@ namespace Altkom._20_22._11.CSharp.Module2.Controls
 
         private void Student_Click(object sender, RoutedEventArgs e)
         {
-            var studentClicked = sender as Button;
-            int studentID = (int)studentClicked.Tag;
-
-            var student = DataSource.Students.SingleOrDefault(s => s.StudentID == studentID);
-
-            if (student == null)
-                return;
-
-            string message = string.Format("Add {0} {1} to your class?", student.FirstName, student.LastName);
-            var reply = MessageBox.Show(message, "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (reply == MessageBoxResult.Yes)
+            try
             {
-                SessionContext.CurrentTeacher.AddToClass(student);
-                Refresh();
-            }            
-            //TODO 9.2d: Przechwyć i obsłuż zdarzenie ClassFullException
+                var studentClicked = sender as Button;
+                int studentID = (int)studentClicked.Tag;
+
+                var student = DataSource.Students.SingleOrDefault(s => s.StudentID == studentID);
+
+                if (student == null)
+                    return;
+
+                string message = string.Format("Add {0} {1} to your class?", student.FirstName, student.LastName);
+                var reply = MessageBox.Show(message, "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (reply == MessageBoxResult.Yes)
+                {
+                    SessionContext.CurrentTeacher.AddToClass(student);
+                    Refresh();
+                }
+            }
+            catch(ClassFullException cfe)
+            {
+                MessageBox.Show($"{cfe.Message}. Class: {cfe.ClassName}", "Enrolling failed", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)

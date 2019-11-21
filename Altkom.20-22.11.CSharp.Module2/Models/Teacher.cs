@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Altkom._20_22._11.CSharp.Module2.Services;
+using System;
 using System.Linq;
 
 namespace Altkom._20_22._11.CSharp.Module2.Models
 {
     public class Teacher : User
-    {        
-        //TODO 9.2a: Utwórz pole określające, że maksymalny rozmiar klasy to 9 soób
+    {
+        public const int MAX_CLASS_SIZE = 9;
+
         public int TeacherID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -22,9 +24,11 @@ namespace Altkom._20_22._11.CSharp.Module2.Models
         }
 
         public void AddToClass(Student student)
-        {            
-            //TODO 9.2b: Policz ile studentów jest obecnie w klasie
-            //TODO 9.2c: Jeśli klasa jest pełna, nie można do niej zapisać kolejnego studenta. Rzuć wyjątek ClassFullException, przekazując oznaczenie klasy jako parametr.
+        {
+            var numberOfStudents = DataSource.Students.Count(s => s.TeacherID == SessionContext.CurrentTeacher.TeacherID);
+            if (numberOfStudents >= MAX_CLASS_SIZE)
+                throw new ClassFullException(SessionContext.CurrentTeacher.Class, "Class full");
+
             if (student.TeacherID == 0)
             {
                 student.TeacherID = TeacherID;

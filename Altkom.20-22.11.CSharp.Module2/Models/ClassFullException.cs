@@ -6,28 +6,32 @@ namespace Altkom._20_22._11.CSharp.Module2.Models
     [Serializable]
     internal class ClassFullException : Exception
     {
-        //TODO 9.1a: Dodaj właściwość ClassName tylko do odczytu. Będzie w niej przechowywane oznaczenie klasy (grupy studentów), która wywołała wyjątek.
+        public string ClassName { get; }
+
         public ClassFullException()
         {
         }
-        
-        //TODO 9.1b: Przekaż parametry konstruktorów bezpośrednio do konstruktorów klasy bazowej
-        public ClassFullException(string message)
+
+        public ClassFullException(string message) : base(message)
         {
         }
 
-        public ClassFullException(string message, Exception innerException)
+        public ClassFullException(string message, Exception innerException) : base(message, innerException)
         {
         }
 
-        protected ClassFullException(SerializationInfo info, StreamingContext context)
+        public ClassFullException(string className, string message) : this(message)
         {
+            ClassName = className;
         }
 
-        //TODO 9.1c: Dodaj konstrukory przyjmujące dodatkowo oznaczenie klasy (grupy studentów)
+        public ClassFullException(string className, string message, Exception innerException) : this(message, innerException)
+        {
+            ClassName = className;
+        }
 
-        protected ClassFullException(SerializationInfo info, StreamingContext context)
-    : base(info, context)
+
+        protected ClassFullException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             ClassName = info.GetString("ClassName");
         }
