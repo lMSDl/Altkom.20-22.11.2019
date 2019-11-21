@@ -34,8 +34,20 @@ namespace Altkom._20_22._11.CSharp.Module2.Models
             Class = className;
         }
 
-        //TODO 6.2a: Napisz funkcję AddToClass(Student student) przypisującą studenta do klasy (przypisz TeacherID). Jeśli student jest już przypisany do klasy rzuć wyjątek.
+        public void AddToClass(Student student)
+        {
+            if (student.TeacherID == 0)
+                student.TeacherID = TeacherID;
+            else
+                throw new ArgumentException(nameof(Student), "Student already in class");
+        }
 
-        //TODO 6.2b: Napisz funkcję RemoveFromClass(Student student) wypisującą studenta z klasy. Jeśli student nie jest przypisany do klasy rzuć wyjątek.
+        public void RemoveFromClass(Student student)
+        {
+            if (student.TeacherID == TeacherID)
+                student.TeacherID = 0;
+            else
+                throw new ArgumentException(nameof(Student), "Student is not assigned to this class");
+        }
     }
 }

@@ -74,10 +74,10 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
             }
         }
 
-        //TODO 6.3d: Otwórz okno dialogowe z funkcjonalnością przypisywania studenta do klasy
         private void EnrollStudent_Click(object sender, RoutedEventArgs e)
         {
-
+            new AssignStudentDialog().ShowDialog();
+            Refresh();
         }
     }
 

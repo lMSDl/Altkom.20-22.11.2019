@@ -27,16 +27,45 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
             Back?.Invoke(sender, e);
         }
 
-        //TODO 6.5: Zapewnij możliwość dodania oceny uczniowi
         private void AddGrade_Click(object sender, RoutedEventArgs e)
         {
-           
+            try
+            {
+                var gd = new GradeDialog();
+                if (gd.ShowDialog() == true)
+                {
+                    var grade = new Grade(
+                        gd.assessmentDate.SelectedDate.Value.ToShortDateString(),
+                        gd.subject.Text,
+                        gd.assessmentGrade.Text,
+                        gd.comments.Text
+                        );
+
+                    SessionContext.CurrentStudent.AddGrade(grade);
+                    DataSource.Grades.Add(grade);
+                    Refresh();
+                }
+            }
+            catch (ArgumentException aex) when (aex.ParamName == nameof(Grade))
+            {
+                MessageBox.Show(aex.Message, "Error adding grade", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Something failed", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        //TODO 6.4: Zapewnij możliwość usunięcia ucznia z klasy
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
-           
+          if(MessageBox.Show($"Remove {SessionContext.CurrentStudent.LastName} {SessionContext.CurrentStudent.FirstName}",
+                "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                SessionContext.CurrentStudent.TeacherID = 0;
+                SessionContext.CurrentTeacher.RemoveFromClass(SessionContext.CurrentStudent);
+                Back?.Invoke(sender, EventArgs.Empty);
+            }
+
         }
 
         public void Refresh()
@@ -46,10 +75,14 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
             if (SessionContext.UserRole == Role.Student)
             {
                 btnBack.Visibility = Visibility.Hidden;
+                btnAddGrade.Visibility = Visibility.Hidden;
+                btnRemove.Visibility = Visibility.Hidden;
             }
             else
             {
                 btnBack.Visibility = Visibility.Visible;
+                btnAddGrade.Visibility = Visibility.Visible;
+                btnRemove.Visibility = Visibility.Visible;
             }
 
             studentGrades.ItemsSource = from Grade g in DataSource.Grades

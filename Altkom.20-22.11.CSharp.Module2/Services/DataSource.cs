@@ -7,19 +7,16 @@ namespace Altkom._20_22._11.CSharp.Module2.Services
 {
     public static class DataSource
     {
-        // TODO 6.1a: Zmień kolekcję Teachers na listę generyczną
-        public static ArrayList Teachers;
+        public static List<Teacher> Teachers;
         public static List<Student> Students;
-        // TODO 6.1b: Zmień kolekcję Grades na listę generyczną
-        public static ArrayList Grades;
-
-        //TODO 6.1e: Dodalij listę stringów o nazwie Subjects 
+        public static List<Grade> Grades;
+        public static List<string> Subjects;
 
         public static void CreateData()
         {
-            //TODO 6.1c: Popraw typ tworzonej kolekcji
-            Teachers = new ArrayList()
-            //TODO 6.1f: Zainicjuj kolekcję Subjects przesmiotami: Math, English, History, Geography, Science
+            Subjects = new List<string> { "Math", "English", "History", "Geography", "Science" };
+
+            Teachers = new List<Teacher>()
             {
                 new Teacher(1, "vallee", "password", "Esther", "Valle", "3C" ),
                 new Teacher(2, "waited", "password", "David", "Waite", "4B" ),
@@ -46,8 +43,7 @@ namespace Altkom._20_22._11.CSharp.Module2.Services
 
             };
 
-            //TODO 6.1d: Popraw typ tworzonej kolekcji
-            Grades = new ArrayList()
+            Grades = new List<Grade>()
             {
                 new Grade() { StudentID = 1, AssessmentDate = DateTime.Now.ToString("d"), SubjectName = "Math", Assessment = "A-", Comments = "Good" },
                 new Grade() { StudentID = 1, AssessmentDate = DateTime.Now.ToString("d"), SubjectName = "English", Assessment = "B+", Comments = "OK" },

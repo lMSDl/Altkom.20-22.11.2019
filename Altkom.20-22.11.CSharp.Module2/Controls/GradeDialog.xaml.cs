@@ -24,7 +24,7 @@ namespace Altkom._20_22._11.CSharp.Module2.Controls
         {
             try
             {
-                var testGrade = new Grade(0, assessmentDate.SelectedDate.Value.ToString("d"), subject.SelectedValue.ToString(), assessmentGrade.Text, comments.Text);
+                var testGrade = new Grade(assessmentDate.SelectedDate.Value.ToString("d"), subject.SelectedValue.ToString(), assessmentGrade.Text, comments.Text);
             }
             catch (Exception ex)
             {

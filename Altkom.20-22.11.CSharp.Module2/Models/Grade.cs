@@ -9,9 +9,8 @@
         public string Comments { get; set; }
 
         //ctrl+. => generate constructor
-        public Grade(int studentID, string assessmentDate, string subjectName, string assessment, string comments)
+        public Grade(string assessmentDate, string subjectName, string assessment, string comments)
         {
-            StudentID = studentID;
             AssessmentDate = assessmentDate;
             SubjectName = subjectName;
             Assessment = assessment;

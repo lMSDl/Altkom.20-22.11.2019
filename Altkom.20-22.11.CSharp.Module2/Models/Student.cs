@@ -41,6 +41,13 @@ namespace Altkom._20_22._11.CSharp.Module2.Models
             return (string.Compare(thisStudentsFullName, otherStudentsFullName));
         }
 
-        //TODO 6.2c: Napisz funkcję AddGrade(Grade grade) przypisującą ocenę studentowi. Jeśli ocena jest już przypisana do jakiegoś studenta rzuć wyjątek.
+        public void AddGrade(Grade grade)
+        {
+            if (grade.StudentID == 0)
+                grade.StudentID = StudentID;
+            else
+                throw new ArgumentException("Grade belongs to different student", nameof(Grade));
+        }
+
     }
 }
