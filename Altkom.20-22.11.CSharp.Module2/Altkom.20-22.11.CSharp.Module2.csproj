@@ -58,6 +58,9 @@
     <Compile Include="Controls\AssignStudentDialog.xaml.cs">
       <DependentUpon>AssignStudentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ChangePasswordDialog.xaml.cs">
+      <DependentUpon>ChangePasswordDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\GradeDialog.xaml.cs">
       <DependentUpon>GradeDialog.xaml</DependentUpon>
     </Compile>
@@ -67,6 +70,7 @@
     <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Services\DataSource.cs" />
     <Compile Include="Services\SessionContext.cs" />
     <Compile Include="Views\LogInView.xaml.cs">
@@ -79,6 +83,10 @@
       <DependentUpon>StudentsView.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\AssignStudentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ChangePasswordDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

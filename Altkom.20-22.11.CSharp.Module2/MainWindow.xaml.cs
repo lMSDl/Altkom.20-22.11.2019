@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Altkom._20_22._11.CSharp.Module2.Views;
+﻿using Altkom._20_22._11.CSharp.Module2.Models;
+using System;
 using System.Windows;
-using Altkom._20_22._11.CSharp.Module2.Models;
 using Altkom._20_22._11.CSharp.Module2.Services;
-using Altkom._20_22._11.CSharp.Module2.Views;
+using Altkom._20_22._11.CSharp.Module2.Controls;
 
 namespace Altkom._20_22._11.CSharp.Module2
 {
@@ -65,6 +66,13 @@ namespace Altkom._20_22._11.CSharp.Module2
         {
             SessionContext.CurrentStudent = e.Student;
             GotoStudentProfile();
+        }
+        private void ChangePassword_Click(object sender, EventArgs e)
+        {
+            if (new ChangePasswordDialog().ShowDialog().Value)
+            {
+                MessageBox.Show("Password changed", "Password", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         private void Refresh()

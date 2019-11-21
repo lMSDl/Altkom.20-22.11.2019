@@ -2,28 +2,12 @@
 
 namespace Altkom._20_22._11.CSharp.Module2.Models
 {
-    //TODO 7.2b: Dodaj dziedziczenie po klasie User do klasy Teacher. Usuń właściwości i metody, które znajdują się już w klasie User.
-    public class Teacher
+    public class Teacher : User
     {
-        private string _password = Guid.NewGuid().ToString();
-
         public int TeacherID { get; set; }
-        public string UserName { get; set; }
-        public string Password
-        {
-            set
-            {
-                _password = value;
-            }
-        }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Class { get; set; }
-
-        public bool VerifyPassword(string pass)
-        {
-            return (string.Compare(pass, _password) == 0);
-        }
 
         public Teacher(int teacherID, string userName, string password, string firstName, string lastName, string className)
         {
@@ -38,17 +22,27 @@ namespace Altkom._20_22._11.CSharp.Module2.Models
         public void AddToClass(Student student)
         {
             if (student.TeacherID == 0)
+            {
                 student.TeacherID = TeacherID;
+            }
             else
-                throw new ArgumentException(nameof(Student), "Student already in class");
+            {
+                throw new ArgumentException("Student", "Student is already assigned to a class");
+            }
         }
 
         public void RemoveFromClass(Student student)
         {
             if (student.TeacherID == TeacherID)
+            {
                 student.TeacherID = 0;
+            }
             else
-                throw new ArgumentException(nameof(Student), "Student is not assigned to this class");
+            {
+                throw new ArgumentException("Student", "Student is not assigned to this class");
+            }
         }
+
+        //TODO 8.2c: Zaimplementuj metodę SetPassword. Zapewnij, że ustawiane hasło będzie mieć co najmniej 8 znaków, w tym co najmniej 2 cyfry.
     }
 }

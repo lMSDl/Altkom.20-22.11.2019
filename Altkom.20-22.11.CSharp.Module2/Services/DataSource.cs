@@ -7,11 +7,6 @@ namespace Altkom._20_22._11.CSharp.Module2.Services
 {
     public static class DataSource
     {        
-        //TODO 7.1a: Utwórz abstrakcujną klasę User z właściwościami i metodami współnymi dla klas Teacher i Student
-        //TODO 7.1b: Przenieś do klasy User właściwość UserName
-        //TODO 7.1c: Przenieś do klasy User właściwość Password
-        //TODO 7.1d: Przenieś do klasy User metodę VerifyPassword
-
         public static List<Teacher> Teachers;
         public static List<Student> Students;
         public static List<Grade> Grades;
