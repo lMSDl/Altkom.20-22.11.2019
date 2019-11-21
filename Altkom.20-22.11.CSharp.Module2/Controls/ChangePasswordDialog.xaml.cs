@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Altkom._20_22._11.CSharp.Module2.Models;
+using System.Windows;
 
 namespace Altkom._20_22._11.CSharp.Module2.Controls
 {
@@ -11,13 +12,30 @@ namespace Altkom._20_22._11.CSharp.Module2.Controls
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            //TODO 8.3a: Pobierz użytkonika
+            var user = SessionContext.UserRole == Role.Student ?
+                (User)SessionContext.CurrentStudent : SessionContext.CurrentTeacher;
 
-            //TODO 8.3b: Sprawdź czy stare hasło (oldPassword.Password) jest prawidłowe
+            if(!user.VerifyPassword(oldPassword.Password))
+            {
+                MessageBox.Show("Old password is incorrect", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-            //TODO 8.3c: Sprawdź czy nowe hasło (newPassword.Password) i jego potwierdzenie (confirm.Password) są takie same
+            if(string.Compare(newPassword.Password, confirm.Password) != 0)
+            {
+                MessageBox.Show("The new password and confirm password fields are different", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-            //TODO 8.3d: Podejmij próbę zapisania hasła. Jeśli hasło nie spełnia wymagań wyświetl MessageBox.
+            try
+            {
+                user.Password = newPassword.Password;
+            }
+            catch
+            {
+                MessageBox.Show("The new password is not sufficiently complex", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             DialogResult = true;
         }

@@ -53,7 +53,8 @@ namespace Altkom._20_22._11.CSharp.Module2.Controls
             {
                 SessionContext.CurrentTeacher.AddToClass(student);
                 Refresh();
-            }
+            }            
+            //TODO 9.2d: Przechwyć i obsłuż zdarzenie ClassFullException
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)

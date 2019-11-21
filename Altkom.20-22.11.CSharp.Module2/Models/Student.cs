@@ -43,7 +43,14 @@ namespace Altkom._20_22._11.CSharp.Module2.Models
             }
         }
 
-
-        //TODO 8.2b: Zaimplementuj metodę SetPassword. Zapewnij, że ustawiane hasło będzie mieć co najmniej 6 znaków.
+        protected override bool SetPassword(string pswd)
+        {
+            if (pswd.Length >= 6)
+            {
+                _password = pswd;
+                return true;
+            }
+            return false;
+        }
     }
 }

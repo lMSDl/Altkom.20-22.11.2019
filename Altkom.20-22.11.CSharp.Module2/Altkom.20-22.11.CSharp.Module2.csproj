@@ -61,6 +61,7 @@
     <Compile Include="Controls\ChangePasswordDialog.xaml.cs">
       <DependentUpon>ChangePasswordDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClassFullException.cs" />
     <Compile Include="Controls\GradeDialog.xaml.cs">
       <DependentUpon>GradeDialog.xaml</DependentUpon>
     </Compile>

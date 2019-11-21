@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 
 namespace Altkom._20_22._11.CSharp.Module2.Models
 {
     public class Teacher : User
-    {
+    {        
+        //TODO 9.2a: Utwórz pole określające, że maksymalny rozmiar klasy to 9 soób
         public int TeacherID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -20,7 +22,9 @@ namespace Altkom._20_22._11.CSharp.Module2.Models
         }
 
         public void AddToClass(Student student)
-        {
+        {            
+            //TODO 9.2b: Policz ile studentów jest obecnie w klasie
+            //TODO 9.2c: Jeśli klasa jest pełna, nie można do niej zapisać kolejnego studenta. Rzuć wyjątek ClassFullException, przekazując oznaczenie klasy jako parametr.
             if (student.TeacherID == 0)
             {
                 student.TeacherID = TeacherID;
@@ -43,6 +47,14 @@ namespace Altkom._20_22._11.CSharp.Module2.Models
             }
         }
 
-        //TODO 8.2c: Zaimplementuj metodę SetPassword. Zapewnij, że ustawiane hasło będzie mieć co najmniej 8 znaków, w tym co najmniej 2 cyfry.
+        protected override bool SetPassword(string pswd)
+        {
+            if(pswd.Length >= 8 && pswd.Count(c => char.IsDigit(c)) >= 2)
+            {
+                _password = pswd;
+                return true;
+            }
+            return false;
+        }
     }
 }

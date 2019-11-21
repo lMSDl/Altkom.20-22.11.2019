@@ -18,9 +18,9 @@ namespace Altkom._20_22._11.CSharp.Module2.Services
 
             Teachers = new List<Teacher>()
             {
-                new Teacher(1, "vallee", "password", "Esther", "Valle", "3C" ),
-                new Teacher(2, "waited", "password", "David", "Waite", "4B" ),
-                new Teacher(3, "newmanb", "password", "Belinda", "Newman", "2A" )
+                new Teacher(1, "vallee", "password99", "Esther", "Valle", "3C" ),
+                new Teacher(2, "waited", "password99", "David", "Waite", "4B" ),
+                new Teacher(3, "newmanb", "password99", "Belinda", "Newman", "2A" )
             };
 
             Students = new List<Student>()
