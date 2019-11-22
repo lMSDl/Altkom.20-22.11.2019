@@ -1,0 +1,6 @@
+@using Altkom._20_22._11.CSharp.WebAPI.Areas.HelpPage.ModelDescriptions
+@model CollectionModelDescription
+@if (Model.ElementDescription is ComplexTypeModelDescription)
+{
+    @Html.DisplayFor(m => m.ElementDescription)
+}

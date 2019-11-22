@@ -2,8 +2,6 @@
 ﻿using Altkom._20_22._11.CSharp.Module2.Models;
 using System;
 using System.Windows;
-using Altkom._20_22._11.CSharp.Module2.Services;
-using Altkom._20_22._11.CSharp.Module2.Controls;
 
 namespace Altkom._20_22._11.CSharp.Module2
 {
@@ -12,8 +10,6 @@ namespace Altkom._20_22._11.CSharp.Module2
         public MainWindow()
         {
             InitializeComponent();
-            DataSource.CreateData();
-            DataSource.Students.Sort();
             GotoLogon();
         }
 
@@ -22,13 +18,13 @@ namespace Altkom._20_22._11.CSharp.Module2
             gridLoggedIn.Visibility = Visibility.Collapsed;
 
             studentsView.Visibility = Visibility.Collapsed;
-            studentProfileView.Visibility = Visibility.Collapsed;
+            //studentProfileView.Visibility = Visibility.Collapsed;
             logInView.Visibility = Visibility.Visible;
         }
 
         private void GotoStudentsPage()
         {
-            studentProfileView.Visibility = Visibility.Collapsed;
+            //studentProfileView.Visibility = Visibility.Collapsed;
             studentsView.Visibility = Visibility.Visible;
             studentsView.Refresh();
         }
@@ -36,8 +32,8 @@ namespace Altkom._20_22._11.CSharp.Module2
         public void GotoStudentProfile()
         {
             studentsView.Visibility = Visibility.Collapsed;
-            studentProfileView.Visibility = Visibility.Visible;
-            studentProfileView.Refresh();
+            //studentProfileView.Visibility = Visibility.Visible;
+            //studentProfileView.Refresh();
         }
 
         private void LogInView_LogInSuccess(object sender, EventArgs e)
@@ -69,10 +65,10 @@ namespace Altkom._20_22._11.CSharp.Module2
         }
         private void ChangePassword_Click(object sender, EventArgs e)
         {
-            if (new ChangePasswordDialog().ShowDialog().Value)
-            {
-                MessageBox.Show("Password changed", "Password", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+        //    if (new ChangePasswordDialog().ShowDialog().Value)
+        //    {
+        //        MessageBox.Show("Password changed", "Password", MessageBoxButton.OK, MessageBoxImage.Information);
+        //    }
         }
 
         private void Refresh()

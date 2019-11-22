@@ -1,6 +1,5 @@
-﻿using Altkom._20_22._11.CSharp.Module2.Controls;
+﻿using Altkom._20_22._11.CSharp.Models;
 using Altkom._20_22._11.CSharp.Module2.Models;
-using Altkom._20_22._11.CSharp.Module2.Services;
 using System;
 using System.Collections;
 using System.Linq;
@@ -23,9 +22,10 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
                            select s;*/
 
             var students = new ArrayList();
+            //TODO 1
             foreach (var student in DataSource.Students)
             {
-                if (student.TeacherID == SessionContext.CurrentTeacher.TeacherID)
+                if (student.TeacherID == SessionContext.CurrentTeacher.UserId)
                 {
                     students.Add(student);
                 }
@@ -50,34 +50,33 @@ namespace Altkom._20_22._11.CSharp.Module2.Views
 
         private void NewStudent_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var sd = new StudentDialog();
-                if (sd.ShowDialog().Value)
-                {
-                    var newStudent = new Student
-                    {
-                        FirstName = sd.firstName.Text,
-                        LastName = sd.lastName.Text,
-                        Password = sd.password.Text
-                    };
+        //    try
+        //    {
+        //        var sd = new StudentDialog();
+        //        if (sd.ShowDialog().Value)
+        //        {
+        //            var newStudent = new Student
+        //            {
+        //                FirstName = sd.firstName.Text,
+        //                LastName = sd.lastName.Text,
+        //                User = new User { UserPassword = sd.password.Text }
+        //            };
 
-                    newStudent.UserName = (newStudent.LastName + newStudent.FirstName.Substring(0, 1)).ToLower();
-                    newStudent.StudentID = DataSource.Students.Max(s => s.StudentID) + 1;
+        //            newStudent.User.UserName = (newStudent.LastName + newStudent.FirstName.Substring(0, 1)).ToLower();
 
-                    DataSource.Students.Add(newStudent);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error creating new student", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+        //            //TODO DataSource.Students.Add(newStudent);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "Error creating new student", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
         }
 
         private void EnrollStudent_Click(object sender, RoutedEventArgs e)
         {
-            new AssignStudentDialog().ShowDialog();
-            Refresh();
+        //    new AssignStudentDialog().ShowDialog();
+        //    Refresh();
         }
     }
 

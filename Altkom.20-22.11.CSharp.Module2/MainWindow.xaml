@@ -63,9 +63,9 @@
                                 Visibility="Collapsed"
                                 StudentSelected="StudentsView_StudentSelected"/>
 
-                <y:StudentProfileView x:Name="studentProfileView"
+                <!--<y:StudentProfileView x:Name="studentProfileView"
                                   Back="StudentProfileView_Back"
-                                  Visibility="Collapsed" />
+                                  Visibility="Collapsed" />-->
                 <!-- CONTENT -->
             </Grid>
         </Grid>
